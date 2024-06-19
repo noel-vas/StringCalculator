@@ -8,21 +8,21 @@ import static junit.framework.TestCase.assertEquals;
 public class AddCalculatorTest {
     @Test
     public void returnZeroOnAnEmptyString() {
-        assertEquals(0, AddCalculator.add(""));
+        assertEquals("0", AddCalculator.add(""));
     }
 
     @Test
     public void returnNonZeroWhenItHasOneNonZeroPara() {
-        assertEquals(1,AddCalculator.add("1"));
+        assertEquals("1",AddCalculator.add("1"));
     }
 
     @Test
     public void returnNonZeroWhenItHasTwoNonZeroPara() {
-        assertEquals(3,AddCalculator.add("1,2"));
+        assertEquals("3",AddCalculator.add("1,2"));
     }
 
     @Test
     public void returnNonZeroWhenItHasMultipleArguments() {
-        assertEquals(5,AddCalculator.add("2,2,1"));
+        assertEquals("5",AddCalculator.add("2,2,1"));
     }
 }

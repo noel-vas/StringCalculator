@@ -1,9 +1,9 @@
 package ca.jbrain.math;
 
 public class AddCalculator {
-    public static int add(String text) {
+    public static String add(String text) {
         if(text.isEmpty()) {
-            return 0;
+            return "0";
         } else  {
             int total = 0;
             String[] sum = text.split(",");
@@ -13,9 +13,8 @@ public class AddCalculator {
                 str= str.trim();
                 total += convertToInt(str);
             }
-            return total;
+            return String.valueOf(total);
         }
-
     }
 
     private static int convertToInt(String text){
