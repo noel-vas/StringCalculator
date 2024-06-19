@@ -4,7 +4,7 @@ public class AddCalculator {
     public static int add(String text) {
         if(text.isEmpty()) {
             return 0;
-        } else if(text.contains(",")) {
+        } else  {
             int total = 0;
             String[] sum = text.split(",");
 
@@ -15,9 +15,7 @@ public class AddCalculator {
             }
             return total;
         }
-        else {
-            return convertToInt(text);
-        }
+
     }
 
     private static int convertToInt(String text){
