@@ -4,7 +4,10 @@ public class AddCalculator {
     public static String add(String text) {
 
         for(int j=0;j<text.length();j++){
-            if((text.charAt(j)==',' || text.charAt(j)=='\n') &&  (text.charAt(j+1)==',' || text.charAt(j+1)=='\n')){
+            if (text.endsWith(",") || text.endsWith("\n")) {
+                return "Number expected but EOF found";
+            }
+            else if((text.charAt(j)==',' || text.charAt(j)=='\n') &&  (text.charAt(j+1)==',' || text.charAt(j+1)=='\n')){
                 return "Number expected but found '\\n' at position 4";
             }
         }
@@ -17,13 +20,9 @@ public class AddCalculator {
             for(String str: sum)
             {
                 str= str.trim();
-                total += convertToInt(str);
+                total += Integer.parseInt(str);
             }
             return String.valueOf(total);
         }
-    }
-
-    private static int convertToInt(String text){
-        return Integer.parseInt(text);
     }
 }

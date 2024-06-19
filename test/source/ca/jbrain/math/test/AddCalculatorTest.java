@@ -33,6 +33,11 @@ public class AddCalculatorTest {
 
     @Test
     public void InvalidSeparatorPosition() {
-            assertEquals("Number expected but found '\\n' at position 4", AddCalculator.add("2,3\n,2"));
+            assertEquals("Number expected but found '\\n' at position 4", AddCalculator.add("2,3,\n2"));
+    }
+
+    @Test
+    public void MissingNumberInLastPosition() {
+            assertEquals( "Number expected but EOF found",AddCalculator.add("1,3,4,"));
     }
 }
