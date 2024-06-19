@@ -30,4 +30,9 @@ public class AddCalculatorTest {
     public void AcceptNewlineAsASeparatorAlongWithCommas() {
         assertEquals("7",AddCalculator.add("2,3\n2"));
     }
+
+    @Test
+    public void InvalidSeparatorPosition() {
+            assertEquals("Number expected but found '\\n' at position 4", AddCalculator.add("2,3\n,2"));
+    }
 }
