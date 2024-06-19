@@ -25,4 +25,9 @@ public class AddCalculatorTest {
     public void returnNonZeroWhenItHasMultipleArguments() {
         assertEquals("5",AddCalculator.add("2,2,1"));
     }
+
+    @Test
+    public void AcceptNewlineAsASeparatorAlongWithCommas() {
+        assertEquals("7",AddCalculator.add("2,3\n2"));
+    }
 }
