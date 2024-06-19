@@ -12,7 +12,12 @@ public class AddCalculatorTest {
     }
 
     @Test
-    public void ReturnNonZeroOnItHasOneNonZeroPara() {
+    public void ReturnNonZeroWhenItHasOneNonZeroPara() {
         assertEquals(1,AddCalculator.add("1"));
+    }
+
+    @Test
+    public void ReturnNonZeroWhenItHasTwoNonZeroPara() {
+        assertEquals(2,AddCalculator.add("1,1"));
     }
 }
