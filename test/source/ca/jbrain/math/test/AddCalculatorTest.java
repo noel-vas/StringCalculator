@@ -7,7 +7,12 @@ import static junit.framework.TestCase.assertEquals;
 
 public class AddCalculatorTest {
     @Test
-    public void ReturnZeroOnEmptyString() {
+    public void ReturnZeroOnAnEmptyString() {
         assertEquals(0, AddCalculator.add(""));
+    }
+
+    @Test
+    public void ReturnNonZeroOnItHasOneNonZeroPara() {
+        assertEquals(1,AddCalculator.add("1"));
     }
 }
