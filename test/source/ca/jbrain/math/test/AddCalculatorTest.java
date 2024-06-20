@@ -18,32 +18,32 @@ public class AddCalculatorTest {
 
     @Test
     public void returnNonZeroWhenItHasTwoNonZeroPara() {
-        assertEquals("3",AddCalculator.add("1,2"));
+        assertEquals("6",AddCalculator.add("1,2,3"));
     }
 
     @Test
     public void returnNonZeroWhenItHasMultipleArguments() {
-        assertEquals("5",AddCalculator.add("2,2,1"));
+        assertEquals("7",AddCalculator.add("2,2,1,2"));
     }
 
     @Test
     public void AcceptNewlineAsASeparatorAlongWithCommas() {
-        assertEquals("7",AddCalculator.add("2,3\n2"));
+        assertEquals("10",AddCalculator.add("2,3\n2\n3"));
     }
 
     @Test
     public void InvalidSeparatorPosition() {
-            assertEquals("Number expected but found '\\n' at position 4", AddCalculator.add("2,3,\n2"));
+            assertEquals("Number expected but found ',' at position 4.", AddCalculator.add("2,3,,2"));
     }
 
     @Test
     public void MissingNumberInLastPosition() {
-            assertEquals( "Number expected but EOF found",AddCalculator.add("1,3,4,"));
+            assertEquals( "Number expected but EOF found",AddCalculator.add("1,3,4,5,"));
     }
 
     @Test
     public void HandlesDifferentDelimiters() {
-        assertEquals("3",AddCalculator.add("//sep\n1sep2"));
+        assertEquals("3",AddCalculator.add("//|\n1|2"));
     }
 
     @Test
@@ -53,6 +53,11 @@ public class AddCalculatorTest {
 
     @Test
     public void ReturnAMessageWhenTheStringHasNegativeNumbers() {
-        assertEquals("Negative not allowed : -1,-2",AddCalculator.add("-1,-2,3"));
+        assertEquals("Negative not allowed : -1,-2,-3",AddCalculator.add("-1,-2,-3"));
+    }
+
+    @Test
+    public void MultipleErrors() {
+        assertEquals( "Number expected but found ',' at position 3.\nNegative not allowed : -1",AddCalculator.add("-1,,2"));
     }
 }
