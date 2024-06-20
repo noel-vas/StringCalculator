@@ -45,4 +45,11 @@ public class AddCalculatorTest {
     public void HandlesDifferentDelimiters() {
         assertEquals("3",AddCalculator.add("//sep\n1sep2"));
     }
+
+    @Test
+    public void ReturnAnInvalidMessageWhenTheActualDelimiterIsNotPresentInCaseOfCustomSeparator() {
+        assertEquals("'|' expected but ',' found at position 3.",AddCalculator.add("//|\n1|2,3"));
+    }
+
+    
 }

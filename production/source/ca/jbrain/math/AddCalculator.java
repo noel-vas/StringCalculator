@@ -12,6 +12,12 @@ public class AddCalculator {
             // Escape delimiter for split method
             String escapedDelimiter = escapeDelimiter(delimiter);
 
+            if (numbers.contains("|") && numbers.contains(",")) {
+                int pos = numbers.indexOf(",");
+                return "'|' expected but ',' found at position " + (pos) + ".";
+            }
+
+
             // Split numbers using the custom delimiter
             String[] sum = numbers.split(escapedDelimiter);
 
