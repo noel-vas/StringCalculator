@@ -51,5 +51,8 @@ public class AddCalculatorTest {
         assertEquals("'|' expected but ',' found at position 3.",AddCalculator.add("//|\n1|2,3"));
     }
 
-    
+    @Test
+    public void ReturnAMessageWhenTheStringHasNegativeNumbers() {
+        assertEquals("Negative not allowed : -1,-2",AddCalculator.add("-1,-2,3"));
+    }
 }

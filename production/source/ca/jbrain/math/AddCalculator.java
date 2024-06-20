@@ -1,5 +1,8 @@
 package ca.jbrain.math;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AddCalculator {
     public static String add(String number) {
 
@@ -17,17 +20,33 @@ public class AddCalculator {
                 return "'|' expected but ',' found at position " + (pos) + ".";
             }
 
-
             // Split numbers using the custom delimiter
             String[] sum = numbers.split(escapedDelimiter);
 
             // Calculate the total sum
             int total = 0;
+            List<Integer> negatives = new ArrayList<>();
             for (String str : sum) {
-                if (!str.trim().isEmpty()) { // Skip empty strings
-                    total += Integer.parseInt(str.trim());
+                if (!str.trim().isEmpty()){
+                    int num = Integer.parseInt(str.trim());
+                    if (num < 0) {
+                        negatives.add(num);
+                    }
+                    total += num;
                 }
             }
+
+            if (!negatives.isEmpty()) {
+                StringBuilder sb = new StringBuilder("Negative not allowed : ");
+                for (int i = 0; i < negatives.size(); i++) {
+                    if (i > 0) {
+                        sb.append(", ");
+                    }
+                    sb.append(negatives.get(i));
+                }
+                return sb.toString();
+            }
+
 
             return String.valueOf(total);
         } else {
@@ -54,12 +73,29 @@ public class AddCalculator {
             return "0";
         } else {
             int total = 0;
+            List<Integer> negatives = new ArrayList<>();
             String[] sum = number.split("[,\n]+");
             for (String str : sum) {
-                total += Integer.parseInt(str.trim());
+                if (!str.trim().isEmpty()) {
+                    int num = Integer.parseInt(str.trim());
+                    if (num < 0) {
+                        negatives.add(num);
+                    }
+                    total += num;
+                }
+            }
+
+            if (!negatives.isEmpty()) {
+                StringBuilder sb = new StringBuilder("Negative not allowed : ");
+                for (int i = 0; i < negatives.size(); i++) {
+                    if (i > 0) {
+                        sb.append(",");
+                    }
+                    sb.append(negatives.get(i));
+                }
+                return sb.toString();
             }
             return String.valueOf(total);
         }
-
     }
 }
