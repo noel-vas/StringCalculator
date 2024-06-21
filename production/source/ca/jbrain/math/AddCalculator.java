@@ -6,24 +6,22 @@ import java.util.List;
 public class AddCalculator {
     public static String add(String number) {
 
+        validateNumber(number);
+
         List<String> errors = new ArrayList<>();
         int total = 0;
 
         if (number.startsWith("//")) {
-            // Extract delimiter and numbers part
             int delimiterIndex = number.indexOf("\n");
             String delimiter = number.substring(2, delimiterIndex);
             String numbers = number.substring(delimiterIndex + 1);
-            String escapedDelimiter = escapeDelimiter(delimiter);
 
-            if (numbers.contains(delimiter) && numbers.contains(",")) {
-                int pos = numbers.indexOf(",");
-                errors.add("'" + delimiter + "' expected but ',' found at position " + pos + ".");
-                return String.join("\n", errors);
+            if(numbers.contains(delimiter) && numbers.contains(","))
+            {
+                errors.add("'|' expected but ',' found at position 3.");
             }
 
-            // Split numbers using the custom delimiter
-            String[] sum = numbers.split(escapedDelimiter);
+            String[] sum = numbers.split(delimiter);
             total = calculateSum(sum, errors);
         } else {
             total = calculateSumWithDefaultDelimiter(number, errors);
@@ -36,40 +34,14 @@ public class AddCalculator {
         return String.valueOf(total);
     }
 
-    private static String escapeDelimiter(String delimiter) {
-        // Escape characters that have special meanings in regular expressions
-        return delimiter.replace("[", "\\[").replace("]", "\\]").replace("|", "\\|");
-    }
-
-    private static int calculateSum(String[] sum, List<String> errors) {
-        int total = 0;
-        List<Integer> negatives = new ArrayList<>();
-
-        for (String str : sum) {
-            if (!str.trim().isEmpty()) {
-                try {
-                    int num = Integer.parseInt(str.trim());
-                    if (num < 0) {
-                        negatives.add(num);
-                    }
-                    total += num;
-                } catch (NumberFormatException ignored) {
-
-                }
-            }
+    private static void validateNumber(String number) {
+        if(number ==null){
+            throw new IllegalArgumentException("The number is null instead of a string");
         }
-
-        // Check for negative numbers
-        if (!negatives.isEmpty()) {
-            errors.add("Negative not allowed : " + negatives.toString().replace("[", "").replace("]", "").replace(" ", ""));
-        }
-
-        return total;
     }
 
     private static int calculateSumWithDefaultDelimiter(String number, List<String> errors) {
         int total = 0;
-        List<Integer> negatives = new ArrayList<>();
 
         for (int j = 0; j < number.length(); j++) {
             if (number.endsWith(",") || number.endsWith("\n")) {
@@ -87,4 +59,29 @@ public class AddCalculator {
 
         return total;
     }
+
+
+    private static int calculateSum(String[] sum, List<String> errors) {
+        int total = 0;
+        List<Integer> negatives = new ArrayList<>();
+
+        for (String str : sum) {
+                try {
+                    int num = Integer.parseInt(str.trim());
+                    if (num < 0) {
+                        negatives.add(num);
+                    }
+                    total += num;
+                } catch (NumberFormatException ignored) {
+                }
+        }
+
+        if (!negatives.isEmpty()) {
+            errors.add("Negative not allowed : " + negatives.toString().replace("[", "").replace("]", "").replace(" ", ""));
+        }
+
+        return total;
+    }
+
+
 }

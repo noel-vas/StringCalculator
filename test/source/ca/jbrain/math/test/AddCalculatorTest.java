@@ -4,6 +4,7 @@ import ca.jbrain.math.AddCalculator;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public class AddCalculatorTest {
     @Test
@@ -59,5 +60,10 @@ public class AddCalculatorTest {
     @Test
     public void MultipleErrors() {
         assertEquals( "Number expected but found ',' at position 3.\nNegative not allowed : -1",AddCalculator.add("-1,,2"));
+    }
+
+    @Test
+    public void ThrowAnInvalidExceptionDuringNullString() {
+        assertThrows(IllegalArgumentException.class,() -> AddCalculator.add(null));
     }
 }
